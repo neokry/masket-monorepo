@@ -1,0 +1,27 @@
+type Buyer @entity {
+  id: ID!
+  metadata: String!
+  purchases: [Purchase!] @derivedFrom(field: "buyer")
+}
+
+type Seller @entity {
+  id: ID!
+  products: [Product!] @derivedFrom(field: "seller")
+  sales: [Purchase!] @derivedFrom(field: "seller")
+}
+
+type Purchase @entity {
+  id: ID!
+  product: Product!
+  timestamp: BigInt!
+  buyer: Buyer!
+  seller: Seller!
+}
+
+type Product @entity {
+  id: ID!
+  price: BigInt!
+  metadata: String!
+  seller: Seller!
+  createdOn: BigInt!
+}
